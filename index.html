@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+  text-align: center;
+}
+
+/* Utility */
+.hidden { display: none; }
+
+/* Countdown */
+#countdown {
+  font-size: 80px;
+  margin-top: 140px;
+  color: white;
+}
+
+/* 🎂 CSS Cake (NO IMAGES) */
+.cake {
+  width: 220px;
+  height: 140px;
+  background: #ffb6c1;
+  border-radius: 10px;
+  margin: 40px auto;
+  position: relative;
+}
+
+.cake::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 0;
+  width: 220px;
+  height: 25px;
+  background: #ff69b4;
+  border-radius: 10px 10px 0 0;
+}
+
+.cake-text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Note box */
+#note {
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  border-radius: 18px;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  max-height: 70vh;
+  overflow-y: auto;   /* ✅ allows scrolling */
+}
+
+#noteText {
+  color: white;
+  font-size: 16px;    /* ✅ fits screen */
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Final Love */
+#love {
+  font-size: 70px;
+  color: red;
+  margin-top: 180px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="countdown">3</div>
+
+<!-- Cake -->
+<div id="cakeSection" class="hidden">
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <div class="cake">
+    <div class="cake-text">HAPPIEST 21ST</div>
+  </div>
+</div>
+
+<!-- Note -->
+<div id="note" class="hidden">
+  <div id="noteText"></div>
+</div>
+
+<!-- Final Love -->
+<div id="loveSection" class="hidden">
+  <div id="love">I LOVE YOU ❤️</div>
+</div>
+
+<!-- Happy Birthday Song -->
+<audio id="song" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c93c2b7a6.mp3"></audio>
+
+<script>
+const message = `Wishing the happiest birthday to a very special person ❤️
+Love you soooo much, chashmish — like really really much 😁
+Yes, I’m being dramatic… but for u, it’s allowed 😌
+
+Aaj sirf yahi wish hai —
+long life, good health,
+aur tere saare dreams jaldi poore ho jaaye
+(except that irritating one, iykyk 😜),
+kyunki mujhe tere saath
+har success celebrate karni hai 😌✨
+You truly deserve all the happiness in the world ❤️
+
+Hum ladte rahenge, jhagdenge bhi 😁
+thodi arguments, thodi nautanki,
+but serious kabhi nahi —
+because that’s literally us ❤️
+
+Aur yaad rakhna:
+❌ new year, new me and you
+✅ new year, better us
+(kam ladayi, zyada hugs 😌)
+
+I want kam ladayi, zyada pyaar,
+unlimited trust,
+aur haan… thoda extra attention mujhe bhi
+(nahi sirf mujhe hi 😜)
+
+Bas ek request hai —
+zoned out mat raha kar 🙄
+smile zyada,
+focus mujhpe thoda zyada 😜
+Baaki sab main sambhaal lungi ❤️
+
+Always remember —
+main hamesha tere saath hoon,
+irritate karne, support karne,
+aur har din tujhe choose karne ke liye 😌
+
+Happy 21st Birthday 🎂✨`;
+
+let count = 3;
+let i = 0;
+
+const countdown = document.getElementById("countdown");
+const noteText = document.getElementById("noteText");
+
+const timer = setInterval(() => {
+  count--;
+  if (count > 0) countdown.innerText = count;
+  else if (count === 0) countdown.innerText = "FOOOO 🎉";
+  else {
+    clearInterval(timer);
+    countdown.classList.add("hidden");
+    document.getElementById("cakeSection").classList.remove("hidden");
+    document.getElementById("song").play();
+
+    setTimeout(() => {
+      document.getElementById("cakeSection").classList.add("hidden");
+      document.getElementById("note").classList.remove("hidden");
+      typeWriter();
+    }, 4000);
+  }
+}, 1000);
+
+/* ⏳ SLOW & READABLE typing */
+function typeWriter() {
+  if (i < message.length) {
+    noteText.innerHTML += message.charAt(i).replace("\n", "<br>");
+    i++;
+    setTimeout(typeWriter, 60); // 👈 slowed down
+  } else {
+    setTimeout(() => {
+      document.getElementById("note").classList.add("hidden");
+      document.getElementById("loveSection").classList.remove("hidden");
+    }, 6000); // enough time to read
+  }
+}
+</script>
+
+</body>
+</html>
